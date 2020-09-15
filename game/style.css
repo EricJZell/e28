@@ -1,0 +1,37 @@
+body {
+  color: #1d3557;
+  font-family: sans-serif;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 300px;
+  width: 300px;
+  border: 5px solid #a8dadc;
+}
+
+.grid-item {
+  background-color: #f1faee;
+  border: 4px solid #1d3557;
+  padding: 30px 0px;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.unplayed {
+  color: #f1faee;
+  cursor: pointer;
+}
+
+.alert {
+  color: #e63946;
+}
+
+.success {
+  color: #457b9d;
+}
+
+button {
+  margin-top: 30px;
+}
