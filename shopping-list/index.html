@@ -17,14 +17,15 @@
     <h1>Shopping List</h1>
     <form v-on:submit.prevent="addItem">
       <label>
+        Qty: <input type="text" v-model.number='qty'>
         Item: <input type="text" v-model='item'>
         <input type="submit" value="Add Item">
       </label>
     </form>
-    <p v-if="list.length">Item Count: {{ list.length }}</p>
+    <p v-if="list.length">Item Count: {{ list.reduce((a, b) => ({qty: a.qty + b.qty})).qty }}</p>
     <p v-else><i>You have no items on your list</i></p>
     <ul>
-      <li v-for="listItem in list">{{ listItem }}</li>
+      <li v-for="listItem in list">{{listItem.qty}} x {{ listItem.name }}</li>
     </ul>
   </div>
 </body>
