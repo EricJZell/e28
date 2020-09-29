@@ -13,7 +13,6 @@ const app = new Vue({
         // from https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
         // var row = Math.floor(index / this.rows);
         // var column = index % this.columns;
-        debugger;
         return "snake";
         // if (this.snake.body.includes(index)) {
         //   return "snake";
