@@ -1,32 +1,53 @@
 const app = new Vue({
     el: '#app',
     data: {
-      boxes: 10000,
-      snake: {
-        body: [5000],
-        direction: "left"
-      },
-      goal: 1234
-    },
-    computed: {
-      setClass() {
-        // from https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
-        // var row = Math.floor(index / this.rows);
-        // var column = index % this.columns;
-        return "snake";
-        // if (this.snake.body.includes(index)) {
-        //   return "snake";
-        // } else if (index === this.goal) {
-        //   return "goal";
-        // }
-      }
+      boxes: [
+        'unplayed', 'unplayed', 'unplayed',
+        'unplayed', 'unplayed', 'unplayed',
+        'unplayed', 'unplayed', 'unplayed'
+      ],
+      winningCombos: [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+      ],
+      turn: 'player',
+      winner: ''
     },
     methods: {
-      start: function() {
-        setInterval(function() {
-          console.log("Hello world");
-          this.goal++;
-        }, 1000)
+      playerPick(index, $event) {
+        if (this.turn === 'computer' || this.boxes[index] !== 'unplayed') {
+          return;
+        }
+        this.boxes[index] = 'player'
+        this.checkWinner('player');
+        this.turn = 'computer';
+      },
+      computerPick() {
+        var unplayed = []
+        for (var i = 0; i < 9; i++) {
+          if (this.boxes[i] === 'unplayed') {
+            unplayed.push(i);
+          }
+        }
+        var randomIndex = Math.floor(Math.random() * unplayed.length);
+        this.boxes[unplayed[randomIndex]] = 'computer';
+        this.checkWinner('computer');
+        this.turn = 'player';
+      },
+      checkWinner(player) {
+        for (var combo of this.winningCombos) {
+          if (
+            this.boxes[combo[0]] === player &&
+            this.boxes[combo[1]] === player &&
+            this.boxes[combo[2]] === player
+          ) {
+            this.winner = player
+            return true;
+          }
+        }
+      },
+      gameOver() {
+        return !!this.winner || (this.boxes.indexOf('unplayed') === -1)
       }
     }
 });

@@ -13,9 +13,17 @@
 
 <body>
   <div id="app">
+    <h1>Welcome to Tic Tac Toe!</h1>
+    <h3 v-if="winner" id="info">It's all over, the {{ winner }} has won</h3>
+    <h3 v-else-if="turn === 'player'" id="info">It's your turn, please make a selection...</h3>
+    <button v-else @click="computerPick">Trigger the computer's pick</button>
     <div class="grid-container">
-      <div v-for="box in boxes" v-bind:class="setClass" class="grid-item"></div>
+      <div v-for="(box, index) in 9" @click="playerPick(index, $event)" :class="boxes[index]" class="grid-item"></div>
     </div>
+    <button v-show="winner">Start a new game</button>
+    <footer>
+      X and O icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+    </footer>
   </div>
 </body>
 </html>
