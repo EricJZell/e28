@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Snake Game</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="style.css">
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div id="app">
+    <h3>
+      Welcome to Classic Snake Game, written with Vue.js!
+      <button
+        @click="start"
+        v-on:keyup.up='snake.direction = "up"'
+        v-on:keyup.down='snake.direction = "down"'
+        v-on:keyup.left='snake.direction = "left"'
+        v-on:keyup.right='snake.direction = "right"'
+      >Start Game</button>
+    </h3>
+    <div class="grid-container">
+      <div v-for="(box, index) in 400" :class="board[index]" class="grid-item"></div>
+    </div>
+  </div>
+</body>
+</html>

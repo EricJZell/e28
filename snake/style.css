@@ -1,0 +1,32 @@
+body {
+  color: #1d3557;
+  font-family: sans-serif;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  height: 800px;
+  width: 800px;
+  border: 5px solid #a8dadc;
+}
+
+.grid-item {
+  background-color: #f1faee;
+  border: 1px solid #1d3557;
+}
+
+.goal {
+  background-color: #457b9d;
+}
+
+.snake {
+  background-color: yellow;
+}
+
+.obstacle {
+  background-color: #e63946
+}
+
+button {
+  margin: 10px;
+}
