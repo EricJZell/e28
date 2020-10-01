@@ -33,7 +33,7 @@ const app = new Vue({
         var app = this;
         this.interval = setInterval(function() {
           app.updateSnake();
-        }, 150);
+        }, 100);
       },
       stop() {
         clearInterval(this.interval);
