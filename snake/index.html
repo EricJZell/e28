@@ -17,14 +17,18 @@
       Welcome to Classic Snake Game, written with Vue.js!
       <button
         @click="start"
-        v-on:keyup.up='snake.direction = "up"'
-        v-on:keyup.down='snake.direction = "down"'
-        v-on:keyup.left='snake.direction = "left"'
-        v-on:keyup.right='snake.direction = "right"'
+        v-on:keydown='processUserInput($event)'
       >Start Game</button>
     </h3>
+    <div class="scores">
+      <h1>Current score: {{ score  }}</h1>
+      <h3 v-if="scores.length">Past Scores:</h3>
+      <ul>
+        <li v-for="s in scores">{{ s }}</li>
+      </ul>
+    </div>
     <div class="grid-container">
-      <div v-for="(box, index) in 400" :class="board[index]" class="grid-item"></div>
+      <div v-for="(box, index) in boardArea" :class="board[index]" class="grid-item"></div>
     </div>
   </div>
 </body>
