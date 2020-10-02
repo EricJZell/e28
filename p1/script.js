@@ -29,8 +29,7 @@ const app = new Vue({
           return;
         }
         this.boxes[index] = 'player'
-        this.checkWinner('player');
-        this.checkForTie();
+        this.checkWinner('player') || this.checkForTie();
         this.turn = 'computer';
       },
       computerPick() {
@@ -38,8 +37,7 @@ const app = new Vue({
           console.log("random");
           this.pickRandom();
         }
-        this.checkWinner('computer');
-        this.checkForTie();
+        this.checkWinner('computer') || this.checkForTie();
         this.turn = 'player';
       },
       smartPick() {
