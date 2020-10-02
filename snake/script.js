@@ -3,23 +3,25 @@ const app = new Vue({
     data: {
       boardWidth: 30,
       boardArea: null,
-      snake: { direction: 'ArrowRight', body: [0]},
+      snake: null,
       board: [],
       goal: null,
       score: 0,
       obstacleCount: 5,
       obstacles: [],
       interval: null,
-      scores: []
+      scores: [],
+      startingCoordinate: 0
     },
     created: function() {
       this.boardArea = this.boardWidth ** 2;
     },
     methods: {
       reset() {
-        this.score = 0;
-        this.snake = { direction: 'ArrowRight', body: [0] };
         this.board = new Array(this.boardArea);
+        this.score = 0;
+        this.snake = { direction: null, body: [this.startingCoordinate] };
+        Vue.set(this.board, this.startingCoordinate, 'snake');
         this.obstacles = [];
         for (var i = 0; i < this.obstacleCount; i++) {
           var obstacle = Math.floor(Math.random() * this.boardArea);
@@ -33,7 +35,7 @@ const app = new Vue({
         var app = this;
         this.interval = setInterval(function() {
           app.updateSnake();
-        }, 100);
+        }, 125);
       },
       stop() {
         clearInterval(this.interval);
