@@ -52,7 +52,7 @@ const app = new Vue({
                 pCount++;
               }
             }
-            if (unplayedIndex && (pCount === 2)) {
+            if ((unplayedIndex || unplayedIndex === 0) && (pCount === 2)) {
               // debugger;
               console.log("smart")
               this.boxes[unplayedIndex] = 'computer';
