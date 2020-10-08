@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Scramble</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="style.css">
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <h1>Welcome to Scramble!</h1>
+    <form v-show='!guessing' @submit.prevent="begin">
+      <label>
+        Enter you player name: <input type=="text" v-model.lazy="name">
+        <button>Let's play!</button>
+      </label>
+    </form>
+    <div v-show='guessing'>
+      <p>Game on, {{ name }}!</p>
+      <p>Your myster word is: <span class='mystery'>{{ scrambled }}</span></p>
+      <p>Hint: <i>{{ this.hint }}</i></p>
+      <form @submit.prevent='submitGuess'>
+        <label>
+          Your guess:
+          <input type='text' v-model.lazy.trim="newGuess">
+          <button>Submit guess</button>
+        </label>
+      </form>
+      <div class="feedback"  v-show="guess">
+        <span :class="['pad-me', { green: correct, red: !correct }]">
+          {{ feedback }}
+          <button @click="reset" v-show="correct">Play Again</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
