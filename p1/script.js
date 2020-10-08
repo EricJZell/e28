@@ -11,8 +11,25 @@ const app = new Vue({
       history: [],
       record: { wins: 0, losses: 0, ties: 0 }
     },
-    created: function() {
+    mounted: function() {
       this.reset();
+    },
+    watch: {
+      boxes() {
+        if (this.checkWinner('player')) {
+          this.result = "You won!";
+          this.record.wins++;
+        } else if (this.checkWinner('computer')) {
+          this.result =  "The computer won.";
+          this.record.losses++;
+        } else if (this.checkForTie()) {
+          this.result = "The game has ended in a tie";
+          this.record.ties++;
+        }
+        if (this.result) {
+          this.history.push(this.result);
+        }
+      }
     },
     methods: {
       reset() {
@@ -28,16 +45,13 @@ const app = new Vue({
         if (this.result || this.turn === 'computer' || this.boxes[index] !== 'unplayed') {
           return;
         }
-        this.boxes[index] = 'player'
-        this.checkWinner('player') || this.checkForTie();
+        Vue.set(this.boxes, index, 'player');
         this.turn = 'computer';
       },
       computerPick() {
         if (!this.smartPick()) {
-          console.log("random");
           this.pickRandom();
         }
-        this.checkWinner('computer') || this.checkForTie();
         this.turn = 'player';
       },
       smartPick() {
@@ -53,9 +67,7 @@ const app = new Vue({
               }
             }
             if ((unplayedIndex || unplayedIndex === 0) && (pCount === 2)) {
-              // debugger;
-              console.log("smart")
-              this.boxes[unplayedIndex] = 'computer';
+              Vue.set(this.boxes, unplayedIndex, 'computer');
               return true;
             }
           }
@@ -70,7 +82,7 @@ const app = new Vue({
           }
         }
         var randomIndex = Math.floor(Math.random() * unplayed.length);
-        this.boxes[unplayed[randomIndex]] = 'computer';
+        Vue.set(this.boxes, unplayed[randomIndex], 'computer');
       },
       checkWinner(player) {
         for (var combo of this.winningCombos) {
@@ -78,25 +90,11 @@ const app = new Vue({
             this.boxes[combo[0]] === player &&
             this.boxes[combo[1]] === player &&
             this.boxes[combo[2]] === player
-          ) {
-            if (player === 'computer') {
-              this.result = 'The computer won';
-              this.record.losses++;
-            } else {
-              this.result = 'You won!';
-              this.record.wins++;
-            }
-            this.history.push(this.result);
-            return true;
-          }
+          ) { return true; }
         }
       },
       checkForTie() {
-        if (this.boxes.indexOf('unplayed') === -1) {
-          this.result = 'The game ended in a tie';
-          this.record.ties++;
-          this.history.push(this.result);
-        }
+        return (this.boxes.indexOf('unplayed') === -1);
       }
     }
 });
