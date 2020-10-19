@@ -1,10 +1,10 @@
+[v-cloak] {
+    display: none
+}
+
 body {
   color: #1d3557;
   font-family: sans-serif;
-}
-
-[v-cloak] {
-    display: none
 }
 
 .grid-container {

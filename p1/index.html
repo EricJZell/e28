@@ -1,37 +1,63 @@
 <!doctype html>
 
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="utf-8">
-
+  <meta charset='utf-8'>
   <title>Tic Tac Toe</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="style.css">
+  <meta name='viewport' content='width=device-width'>
+  <link rel='stylesheet' href='style.css'>
   <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
-  <script src="script.js" defer></script>
+  <script src='script.js' defer></script>
 </head>
 
 <body>
-  <div id="app" v-cloak>
-    <h1>Welcome to Tic Tac Toe!</h1>
-    <h3 v-if="result" id="info">It's all over! {{ result }}</h3>
-    <h3 v-else-if="turn === 'player'" id="info">It's your turn, please make a selection...</h3>
-    <button v-else @click="computerPick">Trigger the computer's pick</button>
-    <div class="grid-container">
-      <div v-for="(box, index) in 9" @click="playerPick(index, $event)" :class="boxes[index]" class="grid-item"></div>
+  <script type='text/x-template' id='board-box'>
+    <div
+      class='grid-item'
+      :class='status'
+      @click="$emit('mark-pick', $vnode.key)">
     </div>
-    <button v-show="result" @click="reset">Start a new game</button>
-    <div v-if="history.length">
-      <h3>Game History</h3>
+  </script>
+
+  <div id='app' v-cloak>
+    <h1>Welcome to Tic Tac Toe!</h1>
+    <h3 v-show='result'>It's all over! {{ result }}</h3>
+    <h3 v-show="turn === 'player' && !result">
+      It's your turn, please make a selection...
+    </h3>
+    <button v-show="turn === 'computer' && !result" @click='computerPick'>
+      Trigger the computer's pick
+    </button>
+
+    <div class='grid-container'>
+      <board-box
+        v-for='(box, index) in 9'
+        :key='index'
+        :status='boxes[index]'
+        @mark-pick='playerPick(index)'
+        class='grid-item'>
+      </board-box>
+    </div>
+
+    <button v-show='result' @click='reset'>Start a new game</button>
+
+    <div v-if='history.length'>
+      <h3>Game History:</h3>
       <ul>
-        <li v-for="gameResult in history">{{ gameResult }}</li>
+        <li v-for='gameResult in history'>{{ gameResult }}</li>
       </ul>
       <h3>
-        {{ `Wins: ${record.wins}, Losses: ${record.losses}, Ties: ${record.ties}` }}
+        Your overall record is:
       </h3>
+      <ul>
+        <li v-for="(count, outcome) in record">
+          {{ outcome }}: {{ count }}
+        </li>
+      </ul>
     </div>
+
     <footer>
-      X and O icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+      X and O icons by <a target='_blank' href='https://icons8.com'>Icons8</a>
     </footer>
   </div>
 </body>

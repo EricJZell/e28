@@ -1,3 +1,8 @@
+Vue.component('board-box', {
+    props: ['status'],
+    template: '#board-box',
+});
+
 const app = new Vue({
     el: '#app',
     data: {
@@ -17,13 +22,13 @@ const app = new Vue({
     watch: {
       boxes() {
         if (this.checkWinner('player')) {
-          this.result = "You won!";
+          this.result = 'You won!';
           this.record.wins++;
         } else if (this.checkWinner('computer')) {
-          this.result =  "The computer won.";
+          this.result =  'The computer won.';
           this.record.losses++;
         } else if (this.checkForTie()) {
-          this.result = "The game has ended in a tie";
+          this.result = 'The game has ended in a tie';
           this.record.ties++;
         }
         if (this.result) {
@@ -41,7 +46,7 @@ const app = new Vue({
         ];
         this.turn = (this.history.length % 2 === 0 ? 'computer' : 'player');
       },
-      playerPick(index, $event) {
+      playerPick(index) {
         if (this.result || this.turn === 'computer' || this.boxes[index] !== 'unplayed') {
           return;
         }
@@ -55,18 +60,18 @@ const app = new Vue({
         this.turn = 'player';
       },
       smartPick() {
-        for (var p of ['computer', 'player']) {
+        for (var contestant of ['computer', 'player']) {
           for (var combo of this.winningCombos) {
-            var pCount = 0;
+            var playedCount = 0;
             var unplayedIndex = null;
             for (var i of combo) {
               if (this.boxes[i] === 'unplayed') {
                 unplayedIndex = i;
-              } else if (this.boxes[i] === p) {
-                pCount++;
+              } else if (this.boxes[i] === contestant) {
+                playedCount++;
               }
             }
-            if ((unplayedIndex || unplayedIndex === 0) && (pCount === 2)) {
+            if ((unplayedIndex || unplayedIndex === 0) && (playedCount === 2)) {
               Vue.set(this.boxes, unplayedIndex, 'computer');
               return true;
             }
