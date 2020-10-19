@@ -55,14 +55,19 @@ const app = new Vue({
         this.turn = 'computer';
       },
       computerPick() {
+        // If there is a 'smart pick', choose that box. Otherwise, pick randomly
         if (!this.smartPick()) {
           this.pickRandom();
         }
         this.turn = 'player';
       },
       smartPick() {
+        // First, look for a pick that will win the game for the computer
+        // Then, look for a pick that will prevent the player from winning
         for (var contestant of ['computer', 'player']) {
           for (var combo of this.winningCombos) {
+            // If, for a winning combo, two boxes are played by the same
+            // contestant, and the third box is unplayed, then that is the 'smart pick'
             var playedCount = 0;
             var unplayedIndex = null;
             for (var i of combo) {
@@ -82,11 +87,13 @@ const app = new Vue({
       },
       pickRandom() {
         var unplayed = []
+        // Get the indexes of all the unplayed boxes
         for (var i = 0; i < 9; i++) {
           if (this.boxes[i] === 'unplayed') {
             unplayed.push(i);
           }
         }
+        // Choose a random index in the array of unplayed indexes
         var randomIndex = Math.floor(Math.random() * unplayed.length);
         Vue.set(this.boxes, unplayed[randomIndex], 'computer');
       },
