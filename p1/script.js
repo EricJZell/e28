@@ -17,7 +17,7 @@ const app = new Vue({
       record: { wins: 0, losses: 0, ties: 0 }
     },
     mounted: function() {
-      this.reset();
+      this.setNewGame();
     },
     watch: {
       boxes() {
@@ -37,13 +37,14 @@ const app = new Vue({
       }
     },
     methods: {
-      reset() {
+      setNewGame() {
         this.result = '';
         this.boxes = [
           'unplayed', 'unplayed', 'unplayed',
           'unplayed', 'unplayed', 'unplayed',
           'unplayed', 'unplayed', 'unplayed'
         ];
+        // alternate who goes first
         this.turn = (this.history.length % 2 === 0 ? 'computer' : 'player');
       },
       playerPick(index) {
@@ -100,6 +101,10 @@ const app = new Vue({
       },
       checkForTie() {
         return (this.boxes.indexOf('unplayed') === -1);
+      },
+      resetHistory() {
+        this.history = [];
+        this.record = { wins: 0, losses: 0, ties: 0 };
       }
     }
 });

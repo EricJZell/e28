@@ -39,7 +39,7 @@
       </board-box>
     </div>
 
-    <button v-show='result' @click='reset'>Start a new game</button>
+    <button v-show='result' @click='setNewGame'>Start a new game</button>
 
     <div v-if='history.length'>
       <h3>Game History:</h3>
@@ -54,6 +54,9 @@
           {{ outcome }}: {{ count }}
         </li>
       </ul>
+      <a href="#" @click.prevent="resetHistory">
+        Reset your game history
+      </a>
     </div>
 
     <footer>
