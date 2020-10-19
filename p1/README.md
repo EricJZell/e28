@@ -7,5 +7,3 @@
 - [Color Palette From coolors.co](https://coolors.co/palettes/trending)
 - [Index attribute in v-for](https://forum.vuejs.org/t/index-attribute-in-v-for/4039)
 - [X and O icons](https://icons8.com/)
-
-## Notes for instructor
