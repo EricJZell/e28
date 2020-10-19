@@ -13,8 +13,9 @@ const app = new Vue({
       scores: [],
       startingCoordinate: 0
     },
-    created: function() {
+    mounted: function() {
       this.boardArea = this.boardWidth ** 2;
+      this.start();
     },
     methods: {
       reset() {
@@ -33,11 +34,14 @@ const app = new Vue({
       start() {
         this.reset();
         var app = this;
+        clearInterval(this.interval);
         this.interval = setInterval(function() {
           app.updateSnake();
         }, 125);
+        this.$refs.button.focus();
       },
       stop() {
+        this.snake.direction = null;
         clearInterval(this.interval);
       },
       setGoal() {
@@ -47,7 +51,19 @@ const app = new Vue({
         Vue.set(this.board, this.goal, 'goal');
       },
       processUserInput($event) {
-        this.snake.direction = $event.key;
+        var newDirection = $event.key;
+        if (["ArrowRight", "ArrowLeft"].includes(newDirection) && ["ArrowRight", "ArrowLeft"].includes(this.snake.direction)) {
+          return;
+        } else if (["ArrowUp", "ArrowDown"].includes(newDirection) && ["ArrowUp", "ArrowDown"].includes(this.snake.direction)) {
+          return;
+        } else {
+          this.snake.direction = newDirection;
+          this.updateSnake();
+          clearInterval(this.interval);
+          this.interval = setInterval(function() {
+            app.updateSnake();
+          }, 125);
+        }
       },
       updateSnake() {
         var delta;
