@@ -21,14 +21,14 @@
         v-on:keydown='processUserInput($event)'
       >Set Board for a New Game</button>
     </h3>
-    <h3>Instructions:</h3>
-    <ul>
-      <li>You are the black dot. Control it with the arrow keys on your keyboard.</li>
-      <li>The teal dot is the goal. Navigate to it.</li>
-      <li>The red dots are obstacles. Avoid them.</li>
-    </ul>
 
     <div class="scores">
+      <h3>Instructions:</h3>
+      <ul>
+        <li>You are the black dot. Control it with the arrow keys on your keyboard.</li>
+        <li>The teal dot is the goal. Navigate to it.</li>
+        <li>The red dots are obstacles. Avoid them.</li>
+      </ul>
       <h1>Current score: {{ score  }}</h1>
       <h3 v-if="scores.length">Past Scores:</h3>
       <ul>
