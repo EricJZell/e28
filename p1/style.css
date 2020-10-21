@@ -5,6 +5,7 @@
 body {
   color: #1d3557;
   font-family: sans-serif;
+  padding: 10px;
 }
 
 .grid-container {
@@ -53,5 +54,5 @@ button {
 
 footer {
   font-size: .8em;
-  margin-top: 200px;
+  margin-top: 50px;
 }

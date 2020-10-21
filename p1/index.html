@@ -21,7 +21,11 @@
 
   <div id='app' v-cloak>
     <h1>Welcome to Tic Tac Toe!</h1>
-    <h3 v-show='result'>It's all over! {{ result }}</h3>
+    <h3
+      v-show='result'
+      :class="{ success: (result === 'You won!'), alert: (result === 'The computer won.') }">
+      It's all over! {{ result }}
+    </h3>
     <h3 v-show="turn === 'player' && !result">
       It's your turn, please make a selection...
     </h3>
@@ -54,12 +58,21 @@
           {{ outcome }}: {{ count }}
         </li>
       </ul>
-      <a href="#" @click.prevent="resetHistory">
+      <a href='#' @click.prevent='resetHistory'>
         Reset your game history
       </a>
     </div>
 
+
+
     <footer>
+      <p id='link-to-snake-game'>
+        Also try out:
+        <a href='http://snake.ericjzell.com' target='_blank'>
+          Classic Snake Game
+        </a>
+        (Still some bugs)
+      </p>
       X and O icons by <a target='_blank' href='https://icons8.com'>Icons8</a>
     </footer>
   </div>

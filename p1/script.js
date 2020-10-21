@@ -28,7 +28,7 @@ const app = new Vue({
           this.result =  'The computer won.';
           this.record.losses++;
         } else if (this.checkForTie()) {
-          this.result = 'The game has ended in a tie';
+          this.result = 'The game ended in a tie';
           this.record.ties++;
         }
         if (this.result) {
