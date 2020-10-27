@@ -7,20 +7,10 @@
   <title>Scramble</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="style.css">
-  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
-  <script src="script.js" defer></script>
+  <script src='/js/master.js' defer></script>
 </head>
 
 <body>
-  <script type='text/x-template' id='feedback-block'>
-    <div class="feedback"  v-show="guess">
-      <span :class="['pad-me', { green: correct, red: !correct }]">
-        {{ feedback }}
-        <button @click="$emit('reset')" v-show="correct">Play Again</button>
-      </span>
-    </div>
-  </script>
-
   <div id="app" v-cloak>
     <h1>Welcome to Scramble!</h1>
     <form v-show='!guessing' @submit.prevent="begin">

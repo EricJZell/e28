@@ -1,27 +1,11 @@
-// Component Vue instance
-Vue.component('feedback-block', {
-    // Note how the data property receives a function in a Component
-    data() {
-        return {
-        }
-    },
-    props: ['guess', 'correct'],
-    computed: {
-      feedback() {
-        return (this.correct ? "yess" : "nooo");
-      }
-    },
-    template: "#feedback-block",
-    methods: {
-      reset() {
-        $emit('reset');
-      }
-    }
-});
-
+import Vue from 'vue';
+import FeedbackBlock from './components/FeedbackBlock.vue';
 
 const app = new Vue({
     el: '#app',
+    components: {
+      'feedback-block' : FeedbackBlock
+    },
     data: {
       name: '',
       word: '',

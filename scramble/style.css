@@ -6,20 +6,3 @@ span.mystery {
   font-family: monospace;
   font-size: 3em;
 }
-
-span.pad-me {
-  padding: 10px;
-}
-
-.green {
-  background-color: green;
-}
-
-.red {
-  background-color: red;
-}
-
-.feedback {
-  margin-top: 30px;
-  color: white;
-}
