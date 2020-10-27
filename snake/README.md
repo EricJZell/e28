@@ -1,6 +1,6 @@
-# Project 1
+# Snake Game
 + By: Eric Zell
-+ Production URL: <http://e28p1.ericjzell.com>
++ Production URL: <http://snake.ericjzell.com>
 
 ## Outside resources
 - [CSS Grid Layout](https://www.w3schools.com/css/css_grid.asp)
