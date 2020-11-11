@@ -3,10 +3,12 @@
     <div v-for="blog in blogs" :key="blog.id">
       <h3>{{ blog.title }}</h3>
       <iframe
-        width="420"
+        width="560"
         height="315"
         :src="blog.video_url"
-      >
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
       </iframe>
       <p>{{ blog.content }}</p>
     </div>
