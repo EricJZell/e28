@@ -1,5 +1,8 @@
 <template>
-  <h6>The home page</h6>
+  <h6>
+    Welcome to my finger picking guitar blog, where I blog about my favorite
+    songs to finger pick on the guitar
+  </h6>
 </template>
 
 <script>

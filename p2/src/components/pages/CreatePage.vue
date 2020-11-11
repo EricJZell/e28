@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'new-blog-page',
+  name: 'create-page',
   data: function() {
     return {};
   }

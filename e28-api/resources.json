@@ -1,4 +1,25 @@
 {
+    "blog": {
+      "title": {
+        "type": "string",
+        "validators": [
+          "required",
+          "min:3",
+          "max:200"
+        ]
+      },
+      "content": {
+        "type": "text",
+        "validators": [
+          "required",
+          "min:7"
+        ]
+      },
+      "video_url": {
+        "type": "string",
+        "validators": ["required"]
+      }
+    },
     "product": {
         "name": {
             "type": "string",

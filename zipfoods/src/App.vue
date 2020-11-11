@@ -43,10 +43,15 @@ export default {
             products: []
         };
     },
+    methods: {
+      updateBlogs() {
+        axios.get('blog').then((response) => {
+          this.blogs = response.data.blog
+        });
+      }
+    },
     mounted() {
-      axios.get('/product').then((response) => {
-        this.products = response.data.product;
-      })
+      this.updateBlogs();
     }
 };
 </script>

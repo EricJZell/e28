@@ -2,33 +2,50 @@
   <div id="app">
     <nav>
       <ul>
-        <li>
+        <li
+          v-for="link in links"
+          :key="link"
+        >
           <router-link
-            v-for="link in links"
-            v-bind:key="link"
-            v-bind:to="paths[link]"
+            :to="paths[link]"
             exact
             >{{ link }}</router-link
           >
         </li>
       </ul>
     </nav>
-    <router-view></router-view>
+    <router-view
+      :blogs="blogs"
+    ></router-view>
   </div>
 </template>
 
 <script>
+
+import { axios } from '@/app.js'
+
 export default {
   name: 'App',
   data() {
     return {
-      links: ['home', 'blogs', 'newBlog'],
+      blogs: [],
+      links: ['home', 'blogs', 'create'],
       paths: {
         home: '/',
         blogs: '/blogs',
-        newBlog: '/new-blog'
+        create: '/create'
       }
     }
+  },
+  methods: {
+    updateBlogs() {
+      axios.get('blog').then((response) => {
+        this.blogs = response.data.blog
+      });
+    }
+  },
+  mounted() {
+    this.updateBlogs();
   }
 }
 </script>

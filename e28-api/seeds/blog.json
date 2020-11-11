@@ -1,0 +1,14 @@
+{
+    "seeds": [
+        {
+            "title": "Rex's Blues by Townes Van Zandt",
+            "content": "Probably my favorite Townes song",
+            "video_url": "https://www.youtube.com/watch?v=lihS-pNNt20"
+        },
+        {
+            "title": "Harlem River Blues by Justin Townes Earle",
+            "content": "A finger picking version of a good song",
+            "video_url": "https://www.youtube.com/watch?v=1AaohmyVtAY"
+        }
+    ]
+}
