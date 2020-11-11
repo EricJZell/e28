@@ -17,16 +17,15 @@
 
 <script>
 import ShowProduct from '@/components/ShowProduct.vue';
-import { products } from '@/products.js';
 
 export default {
     name: '',
     components: {
         'show-product': ShowProduct,
     },
+    props: ['products'],
     data: function () {
         return {
-            products: products,
         };
     },
 };

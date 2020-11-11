@@ -1,34 +1,41 @@
 <template>
-    <div>
-      <show-product
-          :product="currentProduct"
-          :show-details="true"
-      ></show-product>
+    <div id="product-page">
+        <div v-if="product">
+            <show-product
+                :product="product"
+                :includeDetails="true"
+            ></show-product>
+        </div>
+
+        <div v-if="productNotFound">
+            <p>Product {{ id }} not found.</p>
+
+            <router-link v-bind:to="'/products'"
+                >Go to all products
+            </router-link>
+        </div>
     </div>
 </template>
 
 <script>
-import { products } from '@/products.js';
 import ShowProduct from '@/components/ShowProduct.vue';
 
 export default {
     name: '',
+    props: ['id', 'products'],
     components: {
-      'show-product' : ShowProduct
+        'show-product': ShowProduct,
     },
-    props: ['id'],
     data() {
-        return {
-          products: products
-        };
+        return {};
     },
     computed: {
-        currentProduct() {
-          return this.products.find(p => String(p.id) === this.id)
-        }
-    }
+        product() {
+            return this.products.find(product => product.id == this.id)
+        },
+        productNotFound() {
+            return this.product == null;
+        },
+    },
 };
 </script>
-
-<style>
-</style>

@@ -10,18 +10,17 @@
 </template>
 
 <script>
-import { products } from '@/products.js';
 
 export default {
     name: '',
+    props: ['products'],
     data: function () {
         return {
-            products: products,
         };
     },
     computed: {
         categories() {
-            let categories = this.products.map((product) => product.categories);
+            let categories = this.products.map((product) => product.categories.split(','));
             let mergedCategories = [].concat.apply([], categories);
 
             // Return unique, sorted categories

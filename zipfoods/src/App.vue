@@ -20,11 +20,13 @@
             </ul>
         </nav>
 
-        <router-view></router-view>
+        <router-view :products="products"></router-view>
     </div>
 </template>
 
 <script>
+import { axios } from '@/app.js'
+
 export default {
     name: 'App',
     data() {
@@ -38,8 +40,14 @@ export default {
                 products: '/products',
                 categories: '/categories',
             },
+            products: []
         };
     },
+    mounted() {
+      axios.get('/product').then((response) => {
+        this.products = response.data.product;
+      })
+    }
 };
 </script>
 
