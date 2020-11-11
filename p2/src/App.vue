@@ -16,6 +16,7 @@
     </nav>
     <router-view
       :blogs="blogs"
+      @update-blogs="updateBlogs()"
     ></router-view>
   </div>
 </template>
@@ -29,11 +30,11 @@ export default {
   data() {
     return {
       blogs: [],
-      links: ['home', 'blogs', 'create'],
+      links: ['home', 'blogs', 'add a blog'],
       paths: {
         home: '/',
         blogs: '/blogs',
-        create: '/create'
+        'add a blog': '/blogs/new'
       }
     }
   },

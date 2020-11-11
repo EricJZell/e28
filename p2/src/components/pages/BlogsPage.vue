@@ -1,16 +1,9 @@
 <template>
   <div>
     <div v-for="blog in blogs" :key="blog.id">
-      <h3>{{ blog.title }}</h3>
-      <iframe
-        width="560"
-        height="315"
-        :src="blog.video_url"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <p>{{ blog.content }}</p>
+      <router-link :to="'blogs/' + blog.id" exact>
+        <h3>{{ blog.title }}</h3>
+      </router-link>
     </div>
   </div>
 </template>
