@@ -13,7 +13,7 @@
       @update-blogs="updateBlogs"
     ></router-view>
     <div class="footer">
-      <router-link :to="'blogs/new'">
+      <router-link :to="'/blogs/new'">
         <h2 class="link">
           New Blog
         </h2>
