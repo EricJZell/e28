@@ -1,0 +1,19 @@
+{
+    "seeds": [
+        {
+            "blog_id": 1,
+            "user_name": "big fan",
+            "content": "this blog is awesome"
+        },
+        {
+            "blog_id": 1,
+            "user_name": "h8tr",
+            "content": "this blog stinks"
+        },
+        {
+            "blog_id": 2,
+            "user_name": "George",
+            "content": "I saw them in live in 2001!"
+        }
+    ]
+}

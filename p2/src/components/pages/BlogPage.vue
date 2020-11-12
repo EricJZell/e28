@@ -10,6 +10,7 @@
     </iframe>
     <blog-preview :blog="blog"></blog-preview>
     <p>{{ blog.content }}</p>
+    <comments-display :comments="comments"></comments-display>
     <router-link :to="'/'">
       <h2 class="link">
         Back Home
@@ -24,15 +25,17 @@
 
 <script>
 import { axios } from '@/app.js';
-import BlogPreview from '@/components/BlogPreview.vue'
+import BlogPreview from '@/components/BlogPreview.vue';
+import CommentsDisplay from '@/components/CommentsDisplay.vue';
 
 export default {
   name: 'blog-page',
   props: ['id', 'show-video'],
-  components: { 'blog-preview': BlogPreview },
+  components: { 'blog-preview': BlogPreview, 'comments-display': CommentsDisplay },
   data: function() {
     return {
-      blog: {}
+      blog: {},
+      comments: []
     };
   },
   methods: {
@@ -46,6 +49,9 @@ export default {
   mounted() {
     axios.get('blog/' + this.id).then((response) => {
       this.blog = response.data.blog;
+      axios.get('comment/query?blog_id=' + this.blog.id).then((commentsResponse) => {
+        this.comments = commentsResponse.data.results;
+      })
     })
   }
 }

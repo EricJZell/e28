@@ -1,4 +1,29 @@
 {
+    "comment": {
+      "blog_id": {
+        "type": "integer",
+        "validators": [
+          "required",
+          "numeric"
+        ]
+      },
+      "user_name": {
+        "type": "string",
+        "validators": [
+          "required",
+          "min:2",
+          "max:50"
+        ]
+      },
+      "content": {
+        "type": "text",
+        "validators": [
+          "required",
+          "min:2",
+          "max:1000"
+        ]
+      }
+    },
     "blog": {
       "title": {
         "type": "string",
