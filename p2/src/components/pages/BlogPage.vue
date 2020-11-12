@@ -1,28 +1,35 @@
 <template>
   <div>
-    <h3>{{ blog.title }}</h3>
     <iframe
-      width="560"
-      height="315"
+      width="100%"
+      height="400px"
       :src="blog.video_url"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
     </iframe>
+    <blog-preview :blog="blog"></blog-preview>
     <p>{{ blog.content }}</p>
-    <button @click="deleteBlog">Delete this blog</button>
-    <router-link :to="'/blogs/edit/' + blog.id">
-      <h3>Edit this blog</h3>
+    <router-link :to="'/'">
+      <h2 class="link">
+        Back Home
+      </h2>
     </router-link>
+    <router-link :to="'/blogs/edit/' + blog.id">
+      <h2 class="link">Edit this blog</h2>
+    </router-link>
+    <h2 class="link" @click="deleteBlog">Delete this blog</h2>
   </div>
 </template>
 
 <script>
 import { axios } from '@/app.js';
+import BlogPreview from '@/components/BlogPreview.vue'
 
 export default {
   name: 'blog-page',
-  props: ['id', 'msg'],
+  props: ['id', 'show-video'],
+  components: { 'blog-preview': BlogPreview },
   data: function() {
     return {
       blog: {}
@@ -43,6 +50,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

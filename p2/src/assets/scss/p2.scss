@@ -21,92 +21,69 @@ $maroon: #85144B;
 
 $white: #FFFFFF;
 $silver: #DDDDDD;
-$gray: #AAAAAA;
+$gray: #888888;
 $black: #111111;
 
 /*----------------------------------------------------
 GENERAL PAGE LAYOUT/DESIGN
 -----------------------------------------------------*/
 #app {
-    font-family: "Lato", sans-serif;
-    max-width: 1000px;
+    font-family: sans-serif;
+    max-width: 700px;
     width: 100%;
     margin: auto;
     padding-bottom: 20px;
-    text-align: center;
 }
 
-hr {
-  margin: 3px
+.header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-nav ul {
-    list-style-type: none;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1.page-title {
     margin: 0;
     padding: 0;
-
-    li {
-        display: inline-block;
-
-        a:link,
-        a:visited,
-        a:hover,
-        a:active,
-            {
-            /* Ref: https://stackoverflow.com/a/49783868 for why inline-block is added */
-            display: inline-block;
-            text-transform: capitalize;
-            padding: 5px;
-            margin: 5px;
-            cursor: pointer;
-            color: $blue;
-        }
-
-        a:hover {
-            background-color: $blue;
-            color: white;
-            text-decoration: none;
-        }
-
-        a.router-link-active:link,
-        a.router-link-active:visited,
-        a.router-link-active:hover,
-        a.router-link-active:active {
-            text-decoration: none;
-            color: $black;
-            background-color: white;
-            cursor: inherit;
-        }
-    }
+    font-weight: 300;
+    font-size: 2.887rem;
+    line-height: 1;
 }
 
-
-/*----------------------------------------------------
-PAGE SPECIFIC
------------------------------------------------------*/
-
-
-/*----------------------------------------------------
-MISC
------------------------------------------------------*/
-.alert {
-    background-color: $green;
-    color: white;
-    border-radius: $radius;
-    font-weight: bold;
-    padding: 5px;
-    margin: 5px;
+h2.link {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 0.889rem;
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: $gray;
+    font-weight: 300;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s;
+h2.link:hover {
+  color: $black;
+  cursor: pointer;
 }
 
-.fade-enter,
-.fade-leave-to
+h2.blog-title {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
 
-/* .fade-leave-active below version 2.1.8 */
-    {
-    opacity: 0;
+h6 {
+  color: $gray;
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  background-color: $white;
 }

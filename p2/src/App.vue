@@ -1,23 +1,24 @@
 <template>
   <div id="app">
-    <nav>
-      <ul>
-        <li
-          v-for="link in links"
-          :key="link"
-        >
-          <router-link
-            :to="paths[link]"
-            exact
-            >{{ link }}</router-link
-          >
-        </li>
-      </ul>
-    </nav>
+    <div class="header">
+      <router-link :to="'/'">
+        <h1 class="page-title">Pickin' a Tune</h1>
+        <h2 class="link">
+          Some of my favorite finger picked guitar style songs
+        </h2>
+      </router-link>
+    </div>
     <router-view
       :blogs="blogs"
       @update-blogs="updateBlogs"
     ></router-view>
+    <div class="footer">
+      <router-link :to="'blogs/new'">
+        <h2 class="link">
+          New Blog
+        </h2>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -30,12 +31,6 @@ export default {
   data() {
     return {
       blogs: [],
-      links: ['home', 'blogs', 'add a blog'],
-      paths: {
-        home: '/',
-        blogs: '/blogs',
-        'add a blog': '/blogs/new'
-      }
     }
   },
   methods: {
