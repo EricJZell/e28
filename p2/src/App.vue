@@ -16,7 +16,7 @@
     </nav>
     <router-view
       :blogs="blogs"
-      @update-blogs="updateBlogs()"
+      @update-blogs="updateBlogs"
     ></router-view>
   </div>
 </template>

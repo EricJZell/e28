@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import HomePage from '@/components/pages/HomePage.vue';
 import BlogsPage from '@/components/pages/BlogsPage.vue';
 import BlogCreatePage from '@/components/pages/BlogCreatePage.vue';
+import BlogEditPage from '@/components/pages/BlogEditPage.vue';
 import BlogPage from '@/components/pages/BlogPage.vue';
 
 Vue.config.productionTip = false
@@ -16,7 +17,8 @@ const router = new VueRouter({
         { path: '/', component: HomePage },
         { path: '/blogs', component: BlogsPage },
         { path: '/blogs/new', component: BlogCreatePage },
-        { path: '/blogs/:id', component: BlogPage, props: true }
+        { path: '/blogs/:id', component: BlogPage, props: true },
+        { path: '/blogs/edit/:id', component: BlogEditPage, props: true }
     ],
 })
 

@@ -1,25 +1,32 @@
 <template>
   <div>
-    <h6>Create a new blog</h6>
+    <h6>Edit this blog</h6>
     <blog-form
       :blog="blog"
-      :method="'post'"
-      :url="'blog'"
+      :method="'put'"
+      :url="'blog/' + blog.id"
       @update-blogs="$emit('update-blogs')"
     ></blog-form>
   </div>
 </template>
 
 <script>
+import { axios } from '@/app.js';
 import BlogForm from '@/components/BlogForm.vue';
 
 export default {
-  name: 'blog-create-page',
+  name: 'blog-edit-page',
   components: { 'blog-form': BlogForm },
+  props: ['id'],
   data: function() {
     return {
-      blog: {title: "", content: "", "video_url": "https://www.youtube.com/embed/woMh7DvOt_Q"}
+      blog: {}
     };
+  },
+  mounted() {
+    axios.get('blog/' + this.id).then((response) => {
+      this.blog = response.data.blog;
+    })
   }
 }
 </script>

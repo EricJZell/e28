@@ -10,6 +10,10 @@
       allowfullscreen>
     </iframe>
     <p>{{ blog.content }}</p>
+    <button @click="deleteBlog">Delete this blog</button>
+    <router-link :to="'/blogs/edit/' + blog.id">
+      <h3>Edit this blog</h3>
+    </router-link>
   </div>
 </template>
 
@@ -23,6 +27,14 @@ export default {
     return {
       blog: {}
     };
+  },
+  methods: {
+    deleteBlog() {
+      axios.delete('blog/' + this.id).then(() => {
+        this.$emit('update-blogs');
+        this.$router.push('/blogs');
+      })
+    }
   },
   mounted() {
     axios.get('blog/' + this.id).then((response) => {
