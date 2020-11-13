@@ -10,7 +10,7 @@
     </iframe>
     <blog-preview :blog="blog"></blog-preview>
     <p>{{ blog.content }}</p>
-    <comments-display :comments="comments"></comments-display>
+    <comments-display :comments="comments" :blogId="id"></comments-display>
     <router-link :to="'/'">
       <h2 class="link">
         Back Home
@@ -49,9 +49,6 @@ export default {
   mounted() {
     axios.get('blog/' + this.id).then((response) => {
       this.blog = response.data.blog;
-      axios.get('comment/query?blog_id=' + this.blog.id).then((commentsResponse) => {
-        this.comments = commentsResponse.data.results;
-      })
     })
   }
 }

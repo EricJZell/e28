@@ -8,10 +8,12 @@
         </h2>
       </router-link>
     </div>
-    <router-view
-      :blogs="blogs"
-      @update-blogs="updateBlogs"
-    ></router-view>
+    <div class="body">
+      <router-view
+        :blogs="blogs"
+        @update-blogs="updateBlogs"
+      ></router-view>
+    </div>
     <div class="footer">
       <router-link :to="'/blogs/new'">
         <h2 class="link">
