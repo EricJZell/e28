@@ -18,7 +18,8 @@ export default {
   components: { 'blog-form': BlogForm },
   data: function() {
     return {
-      blog: {title: "", content: "", "video_url": "https://www.youtube.com/embed/woMh7DvOt_Q"}
+      // Pre-populate the video url for ease. It is 'Landslide' by Fleetwood Mac
+      blog: {title: "", content: "", "video_url": "https://www.youtube.com/embed/k4M53xndqiU"}
     };
   }
 }
