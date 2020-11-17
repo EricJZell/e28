@@ -2,13 +2,28 @@
     "seeds": [
         {
             "title": "Rex's Blues by Townes Van Zandt",
-            "content": "Probably my favorite Townes song",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et hendrerit felis. Integer justo enim, imperdiet sed nulla ac, tristique placerat lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam eget libero dapibus, auctor leo at, ullamcorper enim. Curabitur sagittis posuere augue, eu cursus dui eleifend nec. Donec cursus vestibulum libero at imperdiet. Integer condimentum, metus sed feugiat sagittis, est quam condimentum enim, vel molestie sem ligula non massa. Etiam viverra libero leo, at fermentum ex gravida convallis. Morbi vehicula nunc at urna eleifend viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
             "video_url": "https://www.youtube.com/embed/OtmddbOydm4"
         },
         {
             "title": "Harlem River Blues by Justin Townes Earle",
-            "content": "A finger picking version of a good song",
+            "content": "Fusce turpis eros, dapibus id tincidunt non, molestie nec est. Morbi vehicula suscipit facilisis. Nam at cursus lacus. Sed imperdiet malesuada nisi, non egestas velit sollicitudin ac. Nullam sed eros porta, ullamcorper dolor a, ultricies est. Proin semper sem ipsum. Cras eu enim ac libero finibus sollicitudin. Sed velit ante, lacinia ut semper et, condimentum non tortor. Donec nisi odio, pellentesque in tempus vel, semper sed tortor. Sed condimentum orci ante, a rhoncus tortor sodales eu. Donec eu velit feugiat, luctus tortor eu, rutrum purus.",
             "video_url": "https://www.youtube.com/embed/1AaohmyVtAY"
+        },
+        {
+            "title": "Ashamed by Deer Tick",
+            "content": "Maecenas molestie dui et justo pretium auctor. Maecenas malesuada commodo consectetur. Donec non maximus tellus. Curabitur vel enim hendrerit velit pharetra lacinia. Fusce id convallis est, sed feugiat est. Pellentesque non dapibus arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+            "video_url": "https://www.youtube.com/embed/woMh7DvOt_Q"
+        },
+        {
+            "title": "Solsbury Hill by Peter Gabriel",
+            "content": "Fusce turpis eros, dapibus id tincidunt non, molestie nec est. Morbi vehicula suscipit facilisis. Nam at cursus lacus. Sed imperdiet malesuada nisi, non egestas velit sollicitudin ac. Nullam sed eros porta, ullamcorper dolor a, ultricies est. Proin semper sem ipsum. Cras eu enim ac libero finibus sollicitudin. Sed velit ante, lacinia ut semper et, condimentum non tortor. Donec nisi odio, pellentesque in tempus vel, semper sed tortor. Sed condimentum orci ante, a rhoncus tortor sodales eu. Donec eu velit feugiat, luctus tortor eu, rutrum purus.",
+            "video_url": "https://www.youtube.com/embed/_OO2PuGz-H8"
+        },
+        {
+            "title": "Fort Worth Blues by Steve Earle",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et hendrerit felis. Integer justo enim, imperdiet sed nulla ac, tristique placerat lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam eget libero dapibus, auctor leo at, ullamcorper enim. Curabitur sagittis posuere augue, eu cursus dui eleifend nec. Donec cursus vestibulum libero at imperdiet. Integer condimentum, metus sed feugiat sagittis, est quam condimentum enim, vel molestie sem ligula non massa. Etiam viverra libero leo, at fermentum ex gravida convallis. Morbi vehicula nunc at urna eleifend viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+            "video_url": "https://www.youtube.com/embed/p4WOys7sWvU"
         }
     ]
 }

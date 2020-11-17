@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
       <router-link :to="'/'">
-        <h1 class="page-title">Pickin' a Tune</h1>
+        <h1 class="page-title">Pickin' Tunes</h1>
         <h2 class="link">
           Some of my favorite finger picked guitar style songs
         </h2>

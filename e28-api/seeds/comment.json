@@ -3,17 +3,22 @@
         {
             "blog_id": 1,
             "user_name": "big fan",
-            "content": "this blog is awesome"
+            "content": "this song rocks"
         },
         {
             "blog_id": 1,
             "user_name": "h8tr",
-            "content": "this blog stinks"
+            "content": "this song is lame"
         },
         {
             "blog_id": 2,
             "user_name": "George",
             "content": "I saw them in live in 2001!"
+        },
+        {
+            "blog_id": 2,
+            "user_name": "Susie",
+            "content": "So did I!"
         }
     ]
 }

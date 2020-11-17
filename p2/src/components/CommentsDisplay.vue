@@ -8,15 +8,15 @@
     </h2>
     <div v-show="displayComments">
       <form @submit.prevent="addComment">
-        <label for="user_name">Commenter Name:</label>
-        <input v-model="comment.user_name" type="text"/>
+        <label for="user_name">Comment As:</label>
+        <input v-model="comment.user_name" type="text"/><br>
         <label for="user_name">Comment:</label>
-        <input v-model="comment.content" type="text"/>
+        <textarea class="new-comment" v-model="comment.content" type="text"/><br>
         <button type="submit">Submit</button>
       </form>
       <ul class="comments-list">
-        <li v-for="comment in comments" :key="comment.id">
-          {{ comment.user_name }}: {{ comment.content }}
+        <li class="comment" v-for="comment in comments" :key="comment.id">
+          <strong>{{ comment.user_name }}:</strong> {{ comment.content }}
         </li>
       </ul>
     </div>
