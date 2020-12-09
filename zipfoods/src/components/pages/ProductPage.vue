@@ -6,6 +6,16 @@
                 :includeDetails="true"
             ></show-product>
 
+            <div v-if="user">
+
+              <button v-show="!favorite" data-test="add-to-favorites" @click="addToFavorites">
+                Add to favorites
+              </button>
+              <button v-show="favorite" data-test="remove-from-favorites" @click="removeFromFavorites">
+                Remove From Favorites
+              </button>
+            </div>
+
             <button data-test="add-to-cart-button" v-on:click="addToCart">
                 Add to Cart
             </button>
@@ -34,6 +44,7 @@
 <script>
 import ShowProduct from '@/components/ShowProduct.vue';
 import { cart } from '@/common/app.js';
+import { axios } from '@/common/app.js';
 
 export default {
     name: '',
@@ -56,6 +67,12 @@ export default {
         products() {
             return this.$store.state.products;
         },
+        user() {
+          return this.$store.state.user;
+        },
+        favorite() {
+          return this.$store.getters.getFavoriteByProductId(this.id);
+        }
     },
     methods: {
         addToCart() {
@@ -67,6 +84,20 @@ export default {
 
             setTimeout(() => (this.addAlert = false), 2000);
         },
+        addToFavorites() {
+          axios.post('favorite', { product_id: this.id }).then((response) => {
+            if (response.data.success) {
+              this.$store.dispatch("fetchFavorites");
+            }
+          })
+        },
+        removeFromFavorites() {
+          axios.delete('favorite/' + this.favorite.id).then((response) => {
+            if (response.data.success) {
+              this.$store.dispatch("fetchFavorites");
+            }
+          })
+        }
     },
 };
 </script>

@@ -48,6 +48,8 @@
                     {{ error }}
                 </li>
             </ul>
+            <h3>Not a member?</h3>
+            <router-link :to="'/register'"><button>Register</button></router-link>
         </div>
     </div>
 </template>
@@ -65,7 +67,6 @@ export default {
                 password: 'asdfasdf',
             },
             errors: null,
-            favorites: [],
         };
     },
     computed: {
@@ -76,25 +77,18 @@ export default {
         products() {
             return this.$store.state.products;
         },
+        favorites() {
+          return this.$store.state.favorites.map((favorite) => {
+            return this.$store.getters.getProductById(favorite.product_id);
+          })
+        }
     },
     methods: {
-        loadFavorites() {
-            if (this.user) {
-                // Because favorite is a auth-protected resource, this will
-                // only return favorites belonging to the authenticated user
-                axios.get('favorite').then((response) => {
-                    this.favorites = response.data.favorite.map((favorite) => {
-                        return this.$store.getters.getProductById(
-                            favorite.product_id
-                        );
-                    });
-                });
-            }
-        },
         login() {
             axios.post('login', this.data).then((response) => {
                 if (response.data.authenticated) {
                     this.$store.commit('setUser', response.data.user);
+                    this.$store.dispatch('fetchFavorites');
                 } else {
                     this.errors = response.data.errors;
                 }
@@ -107,14 +101,6 @@ export default {
                 }
             });
         },
-    },
-    watch: {
-        user() {
-            this.loadFavorites();
-        },
-    },
-    mounted() {
-        this.loadFavorites();
     },
 };
 </script>

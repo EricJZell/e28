@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         cartCount: 0,
         products: [],
-        user: null
+        user: null,
+        favorites: []
     },
     mutations: {
         setCartCount(state, payload) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         setUser(state, payload) {
             state.user = payload;
         },
+        setFavorites(state, payload) {
+          state.favorites = payload;
+        }
     },
     actions: {
         fetchProducts(context) {
@@ -31,9 +35,15 @@ export default new Vuex.Store({
             axios.post('auth').then((response) => {
                 if (response.data.authenticated) {
                     context.commit('setUser', response.data.user);
+                    context.dispatch('fetchFavorites');
                 }
             });
         },
+        fetchFavorites(context) {
+          axios.get('favorite').then((response) => {
+            context.commit('setFavorites', response.data.favorite);
+          })
+        }
     },
     getters: {
         getProductById(state) {
@@ -42,6 +52,13 @@ export default new Vuex.Store({
                     return product.id == id;
                 }, this.id)[0];
             }
+        },
+        getFavoriteByProductId(state) {
+          return function (product_id) {
+            return state.favorites.find((favorite) => {
+              return favorite.product_id == product_id;
+            })
+          }
         }
     }
 })
