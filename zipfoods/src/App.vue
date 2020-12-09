@@ -14,45 +14,64 @@
                         v-bind:key="link"
                         v-bind:to="paths[link]"
                         exact
-                        >{{ link }}</router-link
+                        :data-test="link + '-link'"
                     >
+                        <span data-test="cart-count" v-if="link == 'cart'"
+                            >({{ cartCount }})</span
+                        >
+                        {{ link }}
+                    </router-link>
                 </li>
             </ul>
         </nav>
 
-        <router-view :products="products"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-import { axios } from '@/app.js'
+import { cart } from '@/common/app.js';
 
 export default {
     name: 'App',
     data() {
         return {
             /* Store links in an array to maintain order */
-            links: ['home', 'products', 'categories'],
+            links: [
+                'home',
+                'products',
+                'categories',
+                'add a product',
+                'account',
+                'cart',
+            ],
 
             /* Map links to the appropriate component */
             paths: {
                 home: '/',
                 products: '/products',
                 categories: '/categories',
+                'add a product': '/products/new',
+                account: '/account',
+                cart: '/cart',
             },
-            products: []
         };
     },
-    methods: {
-      updateBlogs() {
-        axios.get('blog').then((response) => {
-          this.blogs = response.data.blog
-        });
-      }
-    },
     mounted() {
-      this.updateBlogs();
-    }
+        this.$store.dispatch('fetchProducts');
+
+        this.$store.commit('setCartCount', cart.count());
+
+        this.$store.dispatch('authUser');
+    },
+    computed: {
+        cartCount() {
+            return this.$store.state.cartCount;
+        },
+        products() {
+            return this.$store.state.products;
+        },
+    },
 };
 </script>
 

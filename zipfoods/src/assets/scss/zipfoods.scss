@@ -112,40 +112,125 @@ nav ul {
 
 
 /*----------------------------------------------------
-PAGE SPECIFIC
+Forms
 -----------------------------------------------------*/
-#products {
-    .product {
-        width: 75%;
-        margin: auto;
-        margin-bottom: 20px;
-        border: 1px solid black;
-        padding: 20px;
+form {
+    text-align: left;
+}
 
-        .product-name {
-            font-weight: bold;
-            font-size: 2.0rem;
-            margin: 5px 0 10px 0;
-        }
+label {
+    display: block;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 20px 0 5px 0;
+    font-weight: bold;
+}
 
-        .product-thumb {
-            width: 200px;
-        }
+input[type=text],
+input[type=password],
+input[type=email],
+textarea {
+    font-size: 1.6rem;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid $silver;
 
-        .product-description {
-            width: 75%;
-            margin: auto;
-            text-align: left;
-            font-style: italic;
-        }
-
-        .product-price {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            font-weight: bold;
-            font-size: 2.0rem;
-        }
+    &.form-input-error {
+        border: 1px solid $red;
     }
 }
+
+label.form-checkbox-label {
+    text-transform: none;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-help {
+    font-size: 1.4rem;
+    color: $gray;
+    margin-top: 5px;
+}
+
+.form-feedback {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.form-feedback-error {
+    color: $red;
+    @extend .form-feedback;
+}
+
+.form-feedback-success {
+    color: $green;
+    @extend .form-feedback;
+}
+
+button {
+    background-color: $blue;
+    font-size: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darken($blue, 10%);
+}
+
+input[type=checkbox],
+input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+input[type=radio] {
+    bottom: 2px;
+}
+
+
+
+/*----------------------------------------------------
+PAGE SPECIFIC
+-----------------------------------------------------*/
+.product {
+    width: 75%;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    .product-name {
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin: 5px 0 10px 0;
+    }
+
+    .product-thumb {
+        width: 200px;
+    }
+
+    .product-description {
+        width: 75%;
+        margin: auto;
+        text-align: left;
+        font-style: italic;
+    }
+
+    .product-price {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 2.0rem;
+    }
+}
+
 
 #featured {
     background-color: lighten($aqua, 10%);
@@ -176,6 +261,10 @@ PAGE SPECIFIC
 /*----------------------------------------------------
 MISC
 -----------------------------------------------------*/
+[v-cloak] {
+    display: none
+}
+
 .cleanList {
     list-style-type: none;
     padding: 0;
@@ -196,9 +285,7 @@ MISC
 }
 
 .fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active below version 2.1.8 */
-    {
+.fade-leave-to {
+    /* .fade-leave-active below version 2.1.8 */
     opacity: 0;
 }

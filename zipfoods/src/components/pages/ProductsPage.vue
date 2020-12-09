@@ -1,16 +1,14 @@
 <template>
     <div id="products">
-        <h2>Products</h2>
+        <h1>Products</h1>
+
         <router-link
             v-for="product in products"
             :key="product.id"
-            :to="'/products/' + product.id"
+            v-bind:to="'/products/' + product.id"
+            exact
         >
-            <show-product
-                :key="product.id"
-                :product="product"
-                :show-details="false"
-            ></show-product>
+            <show-product :product="product"></show-product>
         </router-link>
     </div>
 </template>
@@ -23,10 +21,14 @@ export default {
     components: {
         'show-product': ShowProduct,
     },
-    props: ['products'],
+    props: [],
     data: function () {
-        return {
-        };
+        return {};
+    },
+    computed: {
+        products() {
+            return this.$store.state.products;
+        },
     },
 };
 </script>

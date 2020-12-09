@@ -1,8 +1,12 @@
 <template>
     <div>
-        <h2>Categories</h2>
+        <h1>Categories</h1>
         <ul class="cleanList">
-            <li v-for="(category, id) in categories" :key="id">
+            <li
+                data-test="category-name"
+                v-for="(category, id) in categories"
+                :key="id"
+            >
                 {{ category }}
             </li>
         </ul>
@@ -10,21 +14,27 @@
 </template>
 
 <script>
-
 export default {
     name: '',
-    props: ['products'],
+    props: [],
     data: function () {
-        return {
-        };
+        return {};
     },
     computed: {
         categories() {
-            let categories = this.products.map((product) => product.categories.split(','));
+            let categories = this.products.map((product) => {
+                if (product.categories) {
+                    return product.categories.split(',');
+                }
+            });
+
             let mergedCategories = [].concat.apply([], categories);
 
             // Return unique, sorted categories
             return [...new Set(mergedCategories)].sort();
+        },
+        products() {
+            return this.$store.state.products;
         },
     },
 };

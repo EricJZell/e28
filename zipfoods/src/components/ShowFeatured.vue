@@ -3,7 +3,11 @@
     <div id="featured">
         <h2>Featured Products</h2>
         <ul class="cleanList">
-            <li v-for="product in featuredProducts" :key="product.id">
+            <li
+                data-test="featured-product"
+                v-for="product in featuredProducts"
+                :key="product.id"
+            >
                 {{ product.name }}
             </li>
         </ul>
@@ -30,6 +34,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-</style>
