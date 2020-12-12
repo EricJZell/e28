@@ -5,13 +5,11 @@
       :blog="blog"
       :method="'put'"
       :url="'blog/' + blog.id"
-      @update-blogs="$emit('update-blogs')"
     ></blog-form>
   </div>
 </template>
 
 <script>
-import { axios } from '@/app.js';
 import BlogForm from '@/components/BlogForm.vue';
 
 export default {
@@ -24,9 +22,7 @@ export default {
     };
   },
   mounted() {
-    axios.get('blog/' + this.id).then((response) => {
-      this.blog = response.data.blog;
-    })
+    this.blog = this.$store.getters.getBlogById(this.id);
   }
 }
 </script>

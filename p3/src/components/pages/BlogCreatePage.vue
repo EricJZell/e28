@@ -5,7 +5,6 @@
       :blog="blog"
       :method="'post'"
       :url="'blog'"
-      @update-blogs="$emit('update-blogs')"
     ></blog-form>
   </div>
 </template>

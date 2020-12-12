@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router';
 
+import store from '@/common/store';
+
 import BlogsPage from '@/components/pages/BlogsPage.vue';
 import BlogCreatePage from '@/components/pages/BlogCreatePage.vue';
 import BlogEditPage from '@/components/pages/BlogEditPage.vue';
@@ -22,6 +24,7 @@ const router = new VueRouter({
 })
 
 new Vue({
-  router,
+  store,                  // shorthand for store: store
+  router,                 // shorthand for router: router
   render: h => h(App),
 }).$mount('#app')

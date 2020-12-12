@@ -16,13 +16,15 @@ import BlogPreview from '@/components/BlogPreview.vue';
 export default {
   name: 'blogs-page',
   components: { 'blog-preview': BlogPreview },
-  props: ['blogs'],
   data: function() {
     return {
       search: ""
     };
   },
   computed: {
+    blogs() {
+      return this.$store.state.blogs;
+    },
     filteredBlogs() {
       if (this.search.length <= 2) {
         return this.blogs;

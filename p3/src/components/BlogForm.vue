@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { axios } from '@/app.js';
+import { axios } from '@/common/app.js';
 
 export default {
   name: 'blog-form',
@@ -28,7 +28,7 @@ export default {
         if (response.data.errors) {
           console.log(response.data.errors);
         } else {
-          this.$emit('update-blogs');
+          this.$store.dispatch('fetchBlogs');
           console.log(response.data)
           this.$router.push('/blogs/' + response.data.blog.id);
         }

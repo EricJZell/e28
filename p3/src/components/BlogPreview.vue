@@ -7,7 +7,6 @@
 
 <script>
   export default {
-    name: 'blog-preview',
     props: ['blog']
   }
 </script>

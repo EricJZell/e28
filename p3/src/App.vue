@@ -9,10 +9,7 @@
       </router-link>
     </div>
     <div class="body">
-      <router-view
-        :blogs="blogs"
-        @update-blogs="updateBlogs"
-      ></router-view>
+      <router-view></router-view>
     </div>
     <div class="footer">
       <router-link :to="'/blogs/new'">
@@ -26,24 +23,10 @@
 
 <script>
 
-import { axios } from '@/app.js'
-
 export default {
   name: 'App',
-  data() {
-    return {
-      blogs: [],
-    }
-  },
-  methods: {
-    updateBlogs() {
-      axios.get('blog').then((response) => {
-        this.blogs = response.data.blog
-      });
-    }
-  },
   mounted() {
-    this.updateBlogs();
+    this.$store.dispatch('fetchBlogs');
   }
 }
 </script>

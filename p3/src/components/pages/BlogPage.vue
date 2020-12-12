@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { axios } from '@/app.js';
+import { axios } from '@/common/app.js';
 import BlogPreview from '@/components/BlogPreview.vue';
 import CommentsDisplay from '@/components/CommentsDisplay.vue';
 
@@ -41,15 +41,13 @@ export default {
   methods: {
     deleteBlog() {
       axios.delete('blog/' + this.id).then(() => {
-        this.$emit('update-blogs');
+        this.$store.dispatch('fetchBlogs')
         this.$router.push('/blogs');
       })
     }
   },
   mounted() {
-    axios.get('blog/' + this.id).then((response) => {
-      this.blog = response.data.blog;
-    })
+    this.blog = this.$store.getters.getBlogById(this.id);
   }
 }
 </script>
