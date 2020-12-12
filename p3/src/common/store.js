@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    blogs: []
+    blogs: [],
+    user: null
   },
   mutations: {
     setBlogs(state, payload) {
       state.blogs = payload;
+    },
+    setUser(state, payload) {
+      state.user = payload;
     }
   },
   actions: {
@@ -18,6 +22,13 @@ export default new Vuex.Store({
       axios.get('blog').then((response) => {
         context.commit('setBlogs', response.data.blog);
       });
+    },
+    authUser(context) {
+      axios.post('auth').then((response) => {
+        if (response.data.authenticated) {
+          context.commit('setUser', response.data.user);
+        }
+      })
     }
   },
   getters: {

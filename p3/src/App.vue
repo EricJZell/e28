@@ -8,6 +8,9 @@
         </h2>
       </router-link>
     </div>
+    <h2 id="login-link" class="link">
+      <router-link :to="'/account'">{{ accountLinkText }}</router-link>
+    </h2>
     <div class="body">
       <router-view></router-view>
     </div>
@@ -25,8 +28,14 @@
 
 export default {
   name: 'App',
+  computed: {
+    accountLinkText() {
+      return this.$store.state.user ? "My Account" : "Login";
+    }
+  },
   mounted() {
     this.$store.dispatch('fetchBlogs');
+    this.$store.dispatch('authUser');
   }
 }
 </script>

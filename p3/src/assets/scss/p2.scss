@@ -49,6 +49,10 @@ h2.link {
     font-weight: 300;
 }
 
+#login-link {
+  float: right;
+}
+
 h2.link:hover {
   color: $black;
   cursor: pointer;
@@ -77,6 +81,8 @@ h6 {
 ul.comments-list {
   max-height: 200px;
   overflow-y: scroll;
+  padding: 0;
+  margin: 10px 0;
 }
 
 label {
