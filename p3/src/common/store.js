@@ -25,7 +25,7 @@ export default new Vuex.Store({
       return function (id) {
         return state.blogs.find((blog) => {
           return blog.id == id;
-        })
+        }) || {};
       }
     }
   }

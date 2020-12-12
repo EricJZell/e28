@@ -34,9 +34,13 @@ export default {
   components: { 'blog-preview': BlogPreview, 'comments-display': CommentsDisplay },
   data: function() {
     return {
-      blog: {},
       comments: []
     };
+  },
+  computed: {
+    blog() {
+      return this.$store.getters.getBlogById(this.id);
+    }
   },
   methods: {
     deleteBlog() {
@@ -45,9 +49,6 @@ export default {
         this.$router.push('/blogs');
       })
     }
-  },
-  mounted() {
-    this.blog = this.$store.getters.getBlogById(this.id);
   }
 }
 </script>
