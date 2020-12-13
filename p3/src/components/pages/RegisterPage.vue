@@ -3,32 +3,36 @@
     <h2>Register</h2>
     <div>
       <label>Name:</label>
-      <input type="text" data-test="email-input" v-model="data.name"/>
+      <input type="text" data-test="name-input" v-model="data.name"/>
+      <error-field v-if="errors && 'name' in errors" :errors="errors.name"></error-field>
       <br>
 
       <label>Email:</label>
       <input type="text" data-test="email-input" v-model="data.email"/>
+      <error-field v-if="errors && 'email' in errors" :errors="errors.email"></error-field>
       <br>
 
       <label>Password:</label>
       <input type="password" data-test="password-input" v-model="data.password"/>
+      <error-field v-if="errors && 'password' in errors" :errors="errors.password"></error-field>
       <br>
 
       <button @click="register" data-test="login-button">Register</button>
-
-      <ul v-if="errors">
-        <li class="error" v-for="(error, index) in errors" :key="index">
-          {{ error }}
-        </li>
-      </ul>
+      <error-field v-if="serverErrors" :errors="serverErrors"></error-field>
     </div>
   </div>
 </template>
 
 <script>
+import Validator from 'validatorjs'
+import ErrorField from '@/components/ErrorField.vue';
 import { axios } from '@/common/app.js'
 
 export default {
+  name: 'register-page',
+  components: {
+    'error-field': ErrorField
+  },
   data() {
     return {
       data: {
@@ -36,19 +40,31 @@ export default {
         email: '',
         password: ''
       },
-      errors: []
+      errors: null,
+      serverErrors: null
     }
   },
   methods: {
     register() {
-      axios.post('register', this.data).then((response) => {
-        if (response.data.success) {
-          this.$store.commit('setUser', this.data);
-          this.$router.push('account');
-        } else {
-          this.errors = response.data.errors;
-        }
+      if (this.validate()) {
+        axios.post('register', this.data).then((response) => {
+          if (response.data.success) {
+            this.$store.commit('setUser', this.data);
+            this.$router.push('account');
+          } else {
+            this.serverErrors = response.data.errors;
+          }
+        });
+      }
+    },
+    validate() {
+      let validator = new Validator(this.data, {
+        name: 'required|between:2,50',
+        email: 'required|email',
+        password: 'required|between:8,20'
       });
+      this.errors = validator.errors.all();
+      return validator.passes();
     }
   }
 }

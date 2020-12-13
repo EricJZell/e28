@@ -5,7 +5,9 @@ $white: #FFFFFF;
 $silver: #F4F4F4;
 $gray: #888888;
 $black: #111111;
-
+$green: #2ECC40;
+$red: #FF4136;
+$radius: 10px;
 /*----------------------------------------------------
 GENERAL PAGE LAYOUT/DESIGN
 -----------------------------------------------------*/
@@ -110,9 +112,33 @@ ul {
   margin: 0;
 }
 
+ul.errors {
+  color: $red;
+}
+
 li.comment {
   margin: 10px 0;
   padding: 10px;
   background-color: $silver;
-  border-radius: 10px;
+  border-radius: $radius;
+}
+
+.success {
+    background-color: $green;
+    color: white;
+    border-radius: $radius;
+    font-weight: bold;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    /* .fade-leave-active below version 2.1.8 */
+    opacity: 0;
 }

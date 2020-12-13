@@ -16,6 +16,12 @@
         <h4 for="user_name">Comment as {{ user.name }}:</h4>
         <form @submit.prevent="addComment">
           <textarea class="new-comment" v-model="comment.content" type="text"/><br>
+          <error-field v-if="errors && 'content' in errors" :errors="errors.content"></error-field>
+          <transition name="fade">
+            <div data-test="comment-added-confirmation" class="success" v-if="showConfirmation">
+              Your comment has been added!
+            </div>
+          </transition>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -30,29 +36,50 @@
 
 <script>
 import { axios } from '@/common/app.js';
+import Validator from 'validatorjs'
+import ErrorField from '@/components/ErrorField.vue'
 
 export default {
   name: 'comments-display',
+  components: {
+    'error-field': ErrorField
+  },
   data() {
     return {
       comments: [],
       displayComments: false,
-      comment: { content: "", blog_id: this.blogId }
+      comment: { content: "", blog_id: this.blogId },
+      errors: null,
+      showConfirmation: false
     }
   },
   props: ["blogId"],
   methods: {
     addComment() {
-      this.comment.user_name = this.user.name;
-      axios.post('/comment', this.comment).then((response) => {
-        if (response.data.errors) {
-          console.log(response.data.errors);
-        } else {
-          var newComment = { ...this.comment };
-          this.comments.push(newComment);
-          this.comment = { user_name: this.user.name, content: "", blog_id: this.blogId }
-        }
+      if (this.validate()) {
+        this.comment.user_name = this.user.name;
+        axios.post('/comment', this.comment).then((response) => {
+          if (response.data.errors) {
+            console.log(response.data.errors);
+          } else {
+            var newComment = { ...this.comment };
+            this.comments.push(newComment);
+            this.comment = { content: "", blog_id: this.blogId };
+            this.showConfirmation = true;
+
+            setTimeout(() => {
+              this.showConfirmation = false;
+            }, 2500);
+          }
+        });
+      }
+    },
+    validate() {
+      let validator = new Validator(this.comment, {
+        content: 'required|between:2,255'
       });
+      this.errors = validator.errors.all();
+      return validator.passes();
     }
   },
   computed: {
