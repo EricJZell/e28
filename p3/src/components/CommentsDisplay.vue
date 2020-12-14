@@ -15,7 +15,7 @@
       <div v-if="user">
         <h4 for="user_name">Comment as {{ user.name }}:</h4>
         <form @submit.prevent="addComment">
-          <textarea class="new-comment" v-model="comment.content" type="text"/><br>
+          <textarea @blur="storeComment" class="new-comment" v-model="comment.content" type="text"/><br>
           <error-field v-if="errors && 'content' in errors" :errors="errors.content"></error-field>
           <transition name="fade">
             <div data-test="comment-added-confirmation" class="success" v-if="showConfirmation">
@@ -53,8 +53,11 @@ export default {
       showConfirmation: false
     }
   },
-  props: ["blogId"],
+  props: ['blogId'],
   methods: {
+    storeComment() {
+      localStorage.setItem('comment' + this.blogId, this.comment.content);
+    },
     addComment() {
       if (this.validate()) {
         this.comment.user_name = this.user.name;
@@ -64,8 +67,9 @@ export default {
           } else {
             var newComment = { ...this.comment };
             this.comments.push(newComment);
-            this.comment = { content: "", blog_id: this.blogId };
+            this.comment = { content: '', blog_id: this.blogId };
             this.showConfirmation = true;
+            localStorage.removeItem('comment' + this.blogId);
 
             setTimeout(() => {
               this.showConfirmation = false;
@@ -88,6 +92,8 @@ export default {
     }
   },
   mounted() {
+    this.comment.content = localStorage.getItem('comment' + this.blogId);
+
     axios.get('comment/query?blog_id=' + this.blogId).then((response) => {
       this.comments = response.data.results;
     })
