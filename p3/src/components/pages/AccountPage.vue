@@ -17,12 +17,7 @@
         <br>
 
         <button @click="login" data-test="login-button">Login</button>
-
-        <ul v-if="errors">
-          <li class="error" v-for="(error, index) in errors" :key="index">
-            {{ error }}
-          </li>
-        </ul>
+        <error-field v-if="errors" :errors="errors"></error-field>
         <h3>Not yet a member?</h3>
         <router-link :to="'/register'"><button>Register</button></router-link>
       </div>
@@ -32,8 +27,12 @@
 
 <script>
 import { axios } from '@/common/app.js';
+import ErrorField from '@/components/ErrorField.vue';
 
 export default {
+  components: {
+    'error-field': ErrorField
+  },
   data() {
     return {
       data: {
