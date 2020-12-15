@@ -3,26 +3,34 @@
     <h2
       @click="displayComments = !displayComments"
       class="link"
+      data-test="comments-link"
     >
       Comments ({{ comments.length}})
     </h2>
     <div v-show="displayComments">
       <ul class="comments-list">
-        <li class="comment" v-for="comment in comments" :key="comment.id">
+        <li data-test="comment" class="comment" v-for="comment in comments" :key="comment.id">
           <strong>{{ comment.user_name }}:</strong> {{ comment.content }}
         </li>
       </ul>
       <div v-if="user">
         <h4 for="user_name">Comment as {{ user.name }}:</h4>
-        <form @submit.prevent="addComment">
-          <textarea @blur="storeComment" class="new-comment" v-model="comment.content" type="text"/><br>
+        <form data-test="new-comment-form" @submit.prevent="addComment">
+          <textarea
+            @blur="storeComment"
+            class="new-comment"
+            v-model="comment.content"
+            type="text"
+            data-test="comment-text-area"
+            />
+          <br>
           <error-field v-if="errors && 'content' in errors" :errors="errors.content"></error-field>
           <transition name="fade">
             <div data-test="comment-added-confirmation" class="success" v-if="showConfirmation">
               Your comment has been added!
             </div>
           </transition>
-          <button type="submit">Submit</button>
+          <button data-test="submit-comment" type="submit">Submit</button>
         </form>
       </div>
       <div v-else>
@@ -56,6 +64,8 @@ export default {
   props: ['blogId'],
   methods: {
     storeComment() {
+      // If user starts a comment but then leaves the page, their comment is
+      // stored in local storage for next time.
       localStorage.setItem('comment' + this.blogId, this.comment.content);
     },
     addComment() {
@@ -92,6 +102,7 @@ export default {
     }
   },
   mounted() {
+    // populate the comment text area with the in-progress comment, if one exists
     this.comment.content = localStorage.getItem('comment' + this.blogId);
 
     axios.get('comment/query?blog_id=' + this.blogId).then((response) => {

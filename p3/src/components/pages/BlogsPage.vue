@@ -1,7 +1,7 @@
 <template>
   <div>
     <label>Search:</label>
-    <input type="text" v-model="search" />
+    <input data-test="search-bar" type="text" v-model="search" />
     <div v-for="blog in filteredBlogs" :key="blog.id">
       <router-link :to="'blogs/' + blog.id" exact>
         <blog-preview :blog="blog"></blog-preview>
@@ -26,6 +26,7 @@ export default {
       return this.$store.state.blogs;
     },
     filteredBlogs() {
+      // Don't filter until user has entered at least 2 characters
       if (this.search.length <= 2) {
         return this.blogs;
       }

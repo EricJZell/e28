@@ -17,7 +17,7 @@
       <error-field v-if="errors && 'password' in errors" :errors="errors.password"></error-field>
       <br>
 
-      <button @click="register" data-test="login-button">Register</button>
+      <button @click="register" data-test="register-button">Register</button>
       <error-field v-if="serverErrors" :errors="serverErrors"></error-field>
     </div>
   </div>
@@ -40,12 +40,16 @@ export default {
         email: '',
         password: ''
       },
+      // Client-Side Validator errors are returned as an object
+      // Server errors are an array. Therefore, we need different variables
       errors: null,
       serverErrors: null
     }
   },
   methods: {
     register() {
+      // I chose not to perform client side validations until user attempts to
+      // to submit the form
       if (this.validate()) {
         axios.post('register', this.data).then((response) => {
           if (response.data.success) {

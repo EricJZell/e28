@@ -1,21 +1,21 @@
 <template>
   <form @submit.prevent="submitForm">
     <label for="title">Title</label><br>
-    <input type="text" v-model="blog.title"><br>
+    <input type="text" data-test="blog-title-input" v-model="blog.title"><br>
     <error-field v-if="errors && 'title' in errors" :errors="errors.title"></error-field>
     <br>
 
     <label for="content">Content</label><br>
-    <textarea v-model="blog.content"></textarea><br>
+    <textarea data-test="blog-content-area" v-model="blog.content"></textarea><br>
     <error-field v-if="errors && 'content' in errors" :errors="errors.content"></error-field>
     <br>
 
     <label for="video_url">Video URL</label><br>
-    <input type="text" v-model="blog.video_url"><br>
+    <input type="text" data-test="video-url-input" v-model="blog.video_url"><br>
     <error-field v-if="errors && 'video_url' in errors" :errors="errors.video_url"></error-field>
     <br>
 
-    <input type="submit" value="Submit">
+    <input type="submit" data-test="submit-button" value="Submit">
   </form>
 </template>
 
@@ -37,6 +37,7 @@ export default {
   props: ['blog', 'method', 'url'],
   methods: {
     submitForm() {
+      // Run client side validator only when user tries to submit form
       if (this.validate()) {
         axios({
           method: this.method,

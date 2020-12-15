@@ -19,7 +19,7 @@
     <router-link :to="'/blogs/edit/' + blog.id">
       <h2 class="link">Edit this blog</h2>
     </router-link>
-    <h2 class="link" @click="deleteBlog">Delete this blog</h2>
+    <h2 v-if="user" class="link" @click="deleteBlog">Delete this blog</h2>
   </div>
 </template>
 
@@ -40,6 +40,9 @@ export default {
   computed: {
     blog() {
       return this.$store.getters.getBlogById(this.id);
+    },
+    user() {
+      return this.$store.state.user;
     }
   },
   methods: {

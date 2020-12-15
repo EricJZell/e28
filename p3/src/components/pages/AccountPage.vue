@@ -19,7 +19,9 @@
         <button @click="login" data-test="login-button">Login</button>
         <error-field v-if="errors" :errors="errors"></error-field>
         <h3>Not yet a member?</h3>
-        <router-link :to="'/register'"><button>Register</button></router-link>
+        <router-link :to="'/register'">
+          <button data-test="register-link">Register</button>
+        </router-link>
       </div>
     </div>
   </div>
