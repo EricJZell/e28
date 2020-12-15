@@ -9,9 +9,9 @@
 * [Dynamic Axios params](https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/)
 
 ## Notes for instructor
-* There are two types of users, admins and non-admins. There are two users in the
-database seed, jill@harvard.edu and jamal@harvard.edu. Both passwords are 'asdfasdf'
-jill@harvard.edu is an admin and jamal@harvard.edu is a non-admin. Admin users
+* There are two types of users: admins and non-admins. There are two users in the
+database seed: `jill@harvard.edu` and `jamal@harvard.edu`. Both passwords are `asdfasdf`.
+`jill@harvard.edu` is an admin and `jamal@harvard.edu` is a non-admin. Admin users
 can create, update, and delete blogs. Non-admin users can comment on blogs.
 Newly registered users are non-admins.
 * All features have end-to-end tests, except for storing of in-progress comments using
