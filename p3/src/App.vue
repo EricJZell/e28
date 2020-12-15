@@ -15,7 +15,7 @@
       <router-view></router-view>
     </div>
     <div class="footer">
-      <router-link :to="'/blogs/new'">
+      <router-link v-if="isAdmin" :to="'/blogs/new'">
         <h2 class="link">
           New Blog
         </h2>
@@ -31,6 +31,9 @@ export default {
   computed: {
     accountLinkText() {
       return this.$store.state.user ? "My Account" : "Login";
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
     }
   },
   mounted() {

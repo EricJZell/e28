@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/blogs/new',
     component: () => import('@/components/pages/BlogCreatePage.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAdmin: true }
   },
   {
     path: '/blogs/:id',
@@ -25,7 +25,7 @@ const routes = [
     path: '/blogs/edit/:id',
     component: () => import('@/components/pages/BlogEditPage.vue'),
     props: true,
-    meta: { requiresAuth: true }
+    meta: { requiresAdmin: true }
   },
   {
     path: '/account',
@@ -47,10 +47,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
 
   const decide = () => {
-    if (requiresAuth && !store.state.user) {
+    if (requiresAdmin && !store.getters.isAdmin) {
       next('/denied');
     } else {
       next();

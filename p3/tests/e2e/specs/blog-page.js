@@ -32,7 +32,7 @@ describe('Blog Page', () => {
 
   it('allows a logged in user to comment', () => {
     const newComment = 'Hello world' + Date.now();
-    cy.login();
+    cy.nonAdminLogin();
     cy.visit('/blogs/' + blog.id);
     cy.get('[data-test="comments-link"]').click();
     cy.get('[data-test="comment-text-area"]').type(newComment);
@@ -47,7 +47,13 @@ describe('Blog Page', () => {
     cy.contains('The content field must be between 2 and 255 characters.')
   })
 
-  it('allows logged in user to delete a blog', () => {
+  it('does not allow non-logged in user to delete a blog', () => {
+    cy.get('Delete this blog').should('not.exist');
+  })
+
+  it('allows admin user to delete a blog', () => {
+    cy.adminLogin();
+    cy.visit('/blogs/' + blog.id);
     cy.contains('Delete this blog');
   })
 })

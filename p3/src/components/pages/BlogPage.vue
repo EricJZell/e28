@@ -16,10 +16,10 @@
         Back Home
       </h2>
     </router-link>
-    <router-link :to="'/blogs/edit/' + blog.id">
+    <router-link v-if="isAdmin" :to="'/blogs/edit/' + blog.id">
       <h2 class="link">Edit this blog</h2>
     </router-link>
-    <h2 v-if="user" class="link" @click="deleteBlog">Delete this blog</h2>
+    <h2 v-if="isAdmin" class="link" @click="deleteBlog">Delete this blog</h2>
   </div>
 </template>
 
@@ -43,6 +43,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
     }
   },
   methods: {

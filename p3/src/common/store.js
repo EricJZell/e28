@@ -4,6 +4,8 @@ import { axios } from '@/common/app.js';
 
 Vue.use(Vuex)
 
+const adminUsers = ["jill@harvard.edu"];
+
 export default new Vuex.Store({
   state: {
     blogs: [],
@@ -44,6 +46,9 @@ export default new Vuex.Store({
           return blog.id == id;
         }) || {};
       }
+    },
+    isAdmin(state) {
+      return state.user && adminUsers.includes(state.user.email.toLowerCase());
     }
   }
 })

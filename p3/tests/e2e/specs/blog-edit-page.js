@@ -3,11 +3,18 @@ describe('Blog Edit Page', () => {
     // Use blog id# 2 since #1 is used in another test
     cy.visit('/blogs/edit/2');
     cy.contains('Access Denied');
-    cy.contains('Only logged-in users can access this feature.');
+    cy.contains('Only Admin users can access this feature.');
+  })
+
+  it('shows the access denied page to non Admin users', () => {
+    cy.nonAdminLogin();
+    cy.visit('/blogs/edit/2');
+    cy.contains('Access Denied');
+    cy.contains('Only Admin users can access this feature.');
   })
 
   it('performs form validation and shows errors', () => {
-    cy.login();
+    cy.adminLogin();
     cy.visit('/blogs/edit/2');
     cy.get('[data-test="blog-title-input"]').clear().type("Yo");
     cy.get('[data-test="blog-content-area"]').clear().type("Yea");

@@ -2,11 +2,18 @@ describe('Blog Create Page', () => {
   it('shows the access denied page to non-logged-in users', () => {
     cy.visit('/blogs/new');
     cy.contains('Access Denied');
-    cy.contains('Only logged-in users can access this feature.');
+    cy.contains('Only Admin users can access this feature.');
+  })
+
+  it('shows the access denied page to non-admin users', () => {
+    cy.nonAdminLogin();
+    cy.visit('/blogs/new');
+    cy.contains('Access Denied');
+    cy.contains('Only Admin users can access this feature.');
   })
 
   it('performs form validation and shows errors', () => {
-    cy.login();
+    cy.adminLogin();
     cy.visit('/blogs/new');
     cy.get('[data-test="blog-title-input"]').clear().type("Yo");
     cy.get('[data-test="blog-content-area"]').clear().type("Yea");
