@@ -11,6 +11,7 @@
       <ul class="comments-list">
         <li data-test="comment" class="comment" v-for="comment in comments" :key="comment.id">
           <strong>{{ comment.user_name }}:</strong> {{ comment.content }}
+          <h2 v-if="isAdmin" class="link" @click="deleteComment(comment.id)">Delete</h2>
         </li>
       </ul>
       <div v-if="user">
@@ -88,6 +89,16 @@ export default {
         });
       }
     },
+    deleteComment(commentId) {
+      axios.delete('comment/' + commentId).then(() => {
+        this.getComments();
+      })
+    },
+    getComments() {
+      axios.get('comment/query?blog_id=' + this.blogId).then((response) => {
+        this.comments = response.data.results;
+      })
+    },
     validate() {
       let validator = new Validator(this.comment, {
         content: 'required|between:2,255'
@@ -99,15 +110,15 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
     }
   },
   mounted() {
     // populate the comment text area with the in-progress comment, if one exists
     this.comment.content = localStorage.getItem('comment' + this.blogId);
-
-    axios.get('comment/query?blog_id=' + this.blogId).then((response) => {
-      this.comments = response.data.results;
-    })
+    this.getComments();
   }
 }
 </script>
